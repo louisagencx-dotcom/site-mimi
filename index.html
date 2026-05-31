@@ -39,17 +39,17 @@
             width: 100vw;
             height: 100vh;
             background-image: url('fleur.png');
-            background-size: 450px; /* Taille fixe parfaite sur ordinateur pour voir tout le bouquet */
-            background-position: center center; /* Centré horizontalement et verticalement pile au milieu */
+            background-size: 450px; /* Taille fixe parfaite sur ordinateur */
+            background-position: center center;
             background-repeat: no-repeat;
             z-index: 0;
             pointer-events: none;
         }
 
-        /* Ajustement de la taille de l'image pour que ça reste proportionné sur l'écran d'un téléphone */
+        /* Ajustement pour les écrans de téléphones */
         @media (max-width: 600px) {
             .background-overlay-flowers {
-                background-size: 85vw; /* Prend 85% de la largeur du téléphone, parfait au milieu */
+                background-size: 85vw;
             }
         }
 
@@ -98,7 +98,7 @@
             text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9), 0 2px 4px rgba(0, 0, 0, 0.9);
         }
 
-        /* Bouton clic stylisé et moderne */
+        /* Bouton clic stylisé */
         .click-btn {
             background-color: var(--text-color);
             color: white;
@@ -164,9 +164,10 @@
             line-height: 1.6;
             font-weight: 400;
             margin-bottom: 30px;
+            text-align: left; /* Aligné à gauche pour que ce soit plus agréable à lire comme une vraie lettre */
         }
 
-        /* Bouton fermer épuré */
+        /* Bouton fermer */
         .close-btn {
             background: transparent;
             border: none;
@@ -187,7 +188,7 @@
 </head>
 <body>
 
-    <!-- Image fleur.png stabilisée et parfaitement centrée -->
+    <!-- Image fleur.png perfectly centered -->
     <div class="background-overlay-flowers"></div>
 
     <!-- Fond de cœurs volants -->
@@ -199,12 +200,13 @@
         <button class="click-btn" onclick="openLetter(event)">clic</button>
     </div>
 
-    <!-- Fenêtre de la lettre en papier blanc (Sans Emojis) -->
+    <!-- Fenêtre de la lettre en papier blanc (Avec ton nouveau message de soutien) -->
     <div class="overlay-letter" id="letterOverlay" onclick="closeLetter()">
         <div class="paper-letter" onclick="event.stopPropagation()">
             <div class="letter-text">
                 Désolé du retard. J'étais en train de coder le site.<br><br>
-                Je sais que c'est compliqué entre nous en ce moment. Mais je t'aime ma future femme de mes enfants.
+                Je sais que c'est compliqué entre nous en ce moment, et je vois bien que c'est difficile aussi avec tes amis et que tu te sens mal dans le groupe. Je voulais juste te rappeler à quel point tu es une fille super forte. Ne laisse jamais personne te faire douter de qui tu es.<br><br>
+                Peu importe les histoires ou les gens autour, oublie pas que je suis là, à tes côtés. Je t'aime ma future femme de mes enfants.
             </div>
             <button class="close-btn" onclick="closeLetter()">Fermer</button>
         </div>
@@ -224,7 +226,6 @@
             overlay.classList.remove('show');
         }
 
-        // Générateur automatique de cœurs en arrière-plan
         function createAmbientHeart() {
             const heart = document.createElement('div');
             heart.classList.add('ambient-heart');
