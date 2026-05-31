@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pour la future maman de nos enfants ❤️</title>
+    <title>Pour toi</title>
     <style>
-        /* --- POLICES ET BASES --- */
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap');
+        /* --- POLICES ET COULEURS APAISANTES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Poppins:wght@300;400&display=swap');
 
         :root {
-            --bg-color: #fdfbf7;
-            --primary-color: #e8a598;
-            --secondary-color: #b5c9c3;
-            --text-color: #4a3f35;
-            --accent-color: #d9746b;
+            --bg-color: #f8f6f2; /* Crème doux */
+            --primary-color: #8fa89b; /* Vert sauge apaisant */
+            --text-color: #3a3f3a; /* Gris-vert très sombre */
+            --accent-color: #bfa38f; /* Taupe / Terracotta très doux */
         }
 
         * {
@@ -27,11 +26,11 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             overflow-x: hidden;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        /* --- EFFET PARTICULES (CŒURS) --- */
-        #hearts-container {
+        /* --- EFFET ÉTINCELLES DISCRETES --- */
+        #sparkle-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -41,21 +40,21 @@
             z-index: 999;
         }
 
-        .heart-particle {
+        .sparkle {
             position: absolute;
             color: var(--accent-color);
-            opacity: 0.6;
-            animation: floatUp 4s linear infinite;
+            font-size: 12px;
+            opacity: 0;
+            animation: flash 1.5s ease-out forwards;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        @keyframes flash {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+            50% { opacity: 0.7; }
+            100% { transform: translate(var(--mx), var(--my)) scale(1.2); opacity: 0; }
         }
 
-        /* --- HERO SECTION --- */
+        /* --- ACCUEIL --- */
         header {
             min-height: 100vh;
             display: flex;
@@ -63,295 +62,172 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
-            background: linear-gradient(180deg, rgba(253,251,247,0) 0%, rgba(245,227,223,0.4) 100%);
+            padding: 30px;
         }
 
-        .hero-img {
-            width: 180px;
-            height: 180px;
+        .main-img {
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid white;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            animation: heartbeat 2s infinite ease-in-out;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
+            margin-bottom: 40px;
+            filter: grayscale(20%);
+            opacity: 0.9;
         }
 
         h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3.5rem;
-            color: var(--accent-color);
-            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            font-size: 2.5rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
         }
 
-        .subtitle {
-            font-size: 1.2rem;
+        .intro-text {
+            font-size: 1.05rem;
+            max-width: 500px;
+            opacity: 0.85;
+            margin-bottom: 40px;
             font-weight: 300;
+        }
+
+        .action-btn {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--text-color);
+            padding: 12px 35px;
+            border-radius: 4px;
+            font-size: 0.9rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 30px;
-            opacity: 0.8;
-        }
-
-        .scroll-btn {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(232,165,152,0.4);
+            transition: all 0.4s ease;
         }
 
-        .scroll-btn:hover {
-            background-color: var(--accent-color);
-            transform: translateY(-3px);
+        .action-btn:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
         }
 
-        /* --- SECTION MOTS DOUX (INTERACTIVE) --- */
-        .section-love {
-            max-width: 1000px;
+        /* --- SECTION CONTENU PRINCIPAL (SOBRE) --- */
+        .content-section {
+            max-width: 650px;
             margin: 0 auto;
-            padding: 80px 20px;
+            padding: 100px 25px;
             text-align: center;
         }
 
-        h2 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.8rem;
-            color: var(--text-color);
-            margin-bottom: 40px;
-        }
-
-        .grid-reasons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-
-        .card {
+        .thought-box {
             background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            transition: all 0.3s ease;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            margin-bottom: 30px;
+            border-left: 3px solid var(--primary-color);
+            text-align: left;
             cursor: pointer;
-            border: 1px solid rgba(232,165,152,0.1);
-            position: relative;
-            overflow: hidden;
+            transition: transform 0.3s;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(232,165,152,0.2);
+        .thought-box:hover {
+            transform: translateY(-2px);
         }
 
-        .card-icon {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            display: inline-block;
-        }
-
-        .card h3 {
+        .thought-box span {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary-color);
+            display: block;
             margin-bottom: 10px;
-            font-size: 1.3rem;
-            color: var(--accent-color);
         }
 
-        .card p {
-            font-size: 0.95rem;
-            opacity: 0.8;
-        }
-
-        /* --- SECTION ENVELOPE SURPRISE --- */
-        .surprise-box {
-            background-color: rgba(181, 201, 195, 0.2);
-            padding: 80px 20px;
-            text-align: center;
-        }
-
-        .envelope {
-            width: 150px;
-            height: 100px;
-            background: var(--primary-color);
-            margin: 30px auto;
-            position: relative;
-            cursor: pointer;
-            border-radius: 0 0 10px 10px;
-            transition: transform 0.3s;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        .envelope:hover {
-            transform: scale(1.05);
-        }
-
-        .envelope::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: 0;
-            border-left: 75px solid transparent;
-            border-right: 75px solid transparent;
-            border-bottom: 50px solid var(--primary-color);
-            transition: transform 0.3s;
-        }
-
-        .letter-modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .letter-content {
-            background: #fffdf9;
-            padding: 40px;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            animation: openLetter 0.4s ease forwards;
-            position: relative;
-        }
-
-        @keyframes openLetter {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .letter-content p {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-            color: var(--text-color);
-        }
-
-        .close-btn {
-            background: var(--secondary-color);
-            border: none;
-            padding: 8px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            color: white;
+        .thought-box p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
         }
 
         /* --- FOOTER --- */
         footer {
-            padding: 40px 20px;
+            padding: 60px 20px;
             text-align: center;
-            font-size: 0.9rem;
-            opacity: 0.6;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            opacity: 0.5;
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
     </style>
 </head>
 <body>
 
-    <div id="hearts-container"></div>
+    <div id="sparkle-container"></div>
 
+    <!-- Accueil discret -->
     <header>
-        <img class="hero-img" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=500&auto=format&fit=crop" alt="Amour">
-        <h1>Pour la plus merveilleuse...</h1>
-        <p class="subtitle">Et la future maman de nos enfants</p>
-        <button class="scroll-btn" onclick="document.getElementById('reasons').scrollIntoView({behavior: 'smooth'});">
-            Clique ici ❤️
+        <!-- Une image sobre et douce sur la maternité/nature -->
+        <img class="main-img" src="https://images.unsplash.com/photo-1551884831-bbf3cdc67099?q=80&w=500&auto=format&fit=crop" alt="Douceur">
+        <h1>Pour la future maman de nos enfants.</h1>
+        <p class="intro-text">Un petit espace calme, juste pour te transmettre de douces pensées et un peu de soutien dans ce rôle si précieux qui t'attend.</p>
+        <button class="action-btn" onclick="document.getElementById('messages').scrollIntoView({behavior: 'smooth'});">
+            Entrer doucement
         </button>
     </header>
 
-    <section class="section-love" id="reasons">
-        <h2>Ce que j'imagine avec toi...</h2>
-        <p>Survole ou clique sur les cartes pour voir de la magie ✨</p>
-
-        <div class="grid-reasons">
-            <div class="card" onclick="createHeartShower()">
-                <span class="card-icon">🏠</span>
-                <h3>Notre Futur</h3>
-                <p>Construire ce foyer dont on parle, remplir notre maison de rires, de vie et de projets fous.</p>
-            </div>
-
-            <div class="card" onclick="createHeartShower()">
-                <span class="card-icon">👶</span>
-                <h3>La Future Maman</h3>
-                <p>Je sais déjà que tu seras la maman la plus douce, la plus aimante et la plus incroyable pour nos enfants.</p>
-            </div>
-
-            <div class="card" onclick="createHeartShower()">
-                <span class="card-icon">✨</span>
-                <h3>Mon Amour</h3>
-                <p>Chaque jour à tes côtés me donne envie de devenir la meilleure version de moi-même pour nous.</p>
-            </div>
+    <!-- Section Messages Simples -->
+    <section class="content-section" id="messages">
+        
+        <div class="thought-box" onclick="triggerSparkles(event)">
+            <span>Reconnaissance</span>
+            <p>"Je sais la force qu'il faut pour porter la vie, et je te respecte profondément pour la maman que tu t'apprêtes à être."</p>
         </div>
-    </section>
 
-    <section class="surprise-box">
-        <h2>Une petite lettre pour toi</h2>
-        <p>Clique sur l'enveloppe pour l'ouvrir</p>
-        <div class="envelope" onclick="toggleLetter(true)"></div>
-    </section>
-
-    <div class="letter-modal" id="letterModal">
-        <div class="letter-content">
-            <p>Mon amour,</p>
-            <p>Ce petit site est juste un prétexte pour te rappeler à quel point tu comptes pour moi. Merci d'être la personne que tu es, et merci de faire partie de ma vie et de mon futur. Je t'aime plus que tout. ❤️</p>
-            <button class="close-btn" onclick="toggleLetter(false)">Fermer la lettre</button>
+        <div class="thought-box" onclick="triggerSparkles(event)">
+            <span>Soutien</span>
+            <p>"Peu importe le moment ou les vagues, sache que mon soutien pour toi reste entier, solide et bienveillant."</p>
         </div>
-    </div>
+
+        <div class="thought-box" onclick="triggerSparkles(event)">
+            <span>Présence</span>
+            <p>"Une simple pensée pour t'apporter un peu de sérénité aujourd'hui. Prends soin de toi, à ton rythme."</p>
+        </div>
+
+    </section>
 
     <footer>
-        Fait avec tout mon amour en 2026 • Toujours à tes côtés.
+        Pensées bienveillantes • 2026
     </footer>
 
+    <!-- SCRIPT ANIMATION SUBTILE -->
     <script>
-        // Fonction pour ouvrir/fermer la lettre surprise
-        function toggleLetter(show) {
-            const modal = document.getElementById('letterModal');
-            modal.style.display = show ? 'flex' : 'none';
-            if(show) createHeartShower();
-        }
-
-        // Fonction pour faire pleuvoir des cœurs quand on clique
-        function createHeartShower() {
-            const container = document.getElementById('hearts-container');
+        function triggerSparkles(e) {
+            const container = document.getElementById('sparkle-container');
             
-            for (let i = 0; i < 15; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('heart-particle');
-                heart.innerHTML = '❤️';
+            // Crée 8 petites étincelles discrètes autour du clic
+            for (let i = 0; i < 8; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.innerHTML = '✦';
                 
-                // Position aléatoire sur la largeur de l'écran
-                heart.style.left = Math.random() * 100 + 'vw';
-                // Vitesse et délai aléatoires pour un effet naturel
-                heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                // Positionnement au niveau du clic
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
                 
-                container.appendChild(heart);
-
-                // On supprime le cœur après la fin de son animation
+                // Direction aléatoire de dispersion
+                const mx = (Math.random() - 0.5) * 100;
+                const my = (Math.random() - 0.5) * 100;
+                sparkle.style.setProperty('--mx', `${mx}px`);
+                sparkle.style.setProperty('--my', `${my}px`);
+                
+                container.appendChild(sparkle);
+                
                 setTimeout(() => {
-                    heart.remove();
-                }, 4000);
+                    sparkle.remove();
+                }, 1500);
             }
         }
-
-        // Petit effet : fait apparaître quelques cœurs au chargement
-        window.onload = () => {
-            setTimeout(createHeartShower, 1000);
-        };
     </script>
 </body>
 </html>
