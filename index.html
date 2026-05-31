@@ -31,7 +31,7 @@
             position: relative;
         }
 
-        /* --- IMAGE DE FOND COUVRE L'ÉCRAN ET COLLÉE EN HAUT --- */
+        /* --- IMAGE DE FOND PILE AU MILIEU, ENTIÈRE ET SANS EXGÉRATION --- */
         .background-overlay-flowers {
             position: fixed;
             top: 0;
@@ -39,18 +39,17 @@
             width: 100vw;
             height: 100vh;
             background-image: url('fleur.png');
-            background-size: cover; /* Remplit l'écran pour éviter que l'image tombe en bas */
-            background-position: center top; /* Centre horizontalement, colle parfaitement en haut */
+            background-size: 450px; /* Taille fixe parfaite sur ordinateur pour voir tout le bouquet */
+            background-position: center center; /* Centré horizontalement et verticalement pile au milieu */
             background-repeat: no-repeat;
             z-index: 0;
             pointer-events: none;
         }
 
-        /* Ajustement spécifique sur mobile pour que le bouquet reste bien proportionné */
+        /* Ajustement de la taille de l'image pour que ça reste proportionné sur l'écran d'un téléphone */
         @media (max-width: 600px) {
             .background-overlay-flowers {
-                background-size: contain; /* Évite un trop gros zoom sur les écrans étroits de téléphone */
-                background-position: center top; 
+                background-size: 85vw; /* Prend 85% de la largeur du téléphone, parfait au milieu */
             }
         }
 
@@ -87,7 +86,6 @@
             width: 100%;
             z-index: 10;
             position: relative;
-            margin-top: 120px; /* Aligne le texte sous les fleurs */
         }
 
         h1 {
@@ -189,7 +187,7 @@
 </head>
 <body>
 
-    <!-- Image fleur.png bloquée en haut de l'écran -->
+    <!-- Image fleur.png stabilisée et parfaitement centrée -->
     <div class="background-overlay-flowers"></div>
 
     <!-- Fond de cœurs volants -->
