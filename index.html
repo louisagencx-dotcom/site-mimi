@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pour toi</title>
     <style>
-        /* --- IMPORTATION DES POLICES --- */
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap');
+        /* --- POLICE DYNAMIQUE ET PROPRE --- */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
 
         :root {
-            --bg-color: #fff0f3; /* Fond rose pastel très doux */
-            --text-color: #4a3f35;
-            --accent-pink: #ffb3c1; /* Rose pastel pour les boutons/éléments */
-            --dark-pink: #ff4d6d; /* Rose soutenu pour le grand cœur */
+            --bg-color: #ffacc5; /* Ta couleur de fond exacte */
+            --text-color: #ff5d8f; /* Ta couleur de texte exacte */
         }
 
         * {
@@ -22,7 +20,7 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             min-height: 100vh;
@@ -30,9 +28,35 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            position: relative;
         }
 
-        /* --- CONTENEUR PRINCIPAL CENTRÉ --- */
+        /* --- PLUIE DE COEURS CONTINUE EN ARRIÈRE-PLAN --- */
+        #hearts-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .ambient-heart {
+            position: absolute;
+            color: var(--text-color);
+            opacity: 0.4;
+            animation: floatUpwards 5s linear infinite;
+        }
+
+        @keyframes floatUpwards {
+            0% { transform: translateY(105vh) scale(0.5); opacity: 0; }
+            15% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        /* --- CONTENEUR PRINCIPAL --- */
         .main-container {
             text-align: center;
             padding: 20px;
@@ -43,230 +67,173 @@
         }
 
         h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
-            color: #ff758f;
-            margin-bottom: 25px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+            font-weight: 700;
+            font-size: 2.2rem;
+            color: var(--text-color);
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
+            line-height: 1.3;
         }
 
-        /* Bouquet de fleurs poétique libre de droits */
-        .flower-bouquet {
-            width: 220px;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid white;
-            box-shadow: 0 8px 20px rgba(255, 179, 193, 0.4);
-            margin-bottom: 35px;
-            animation: gentleFloat 4s ease-in-out infinite;
+        /* Ton image locale fleur.png */
+        .flower-image {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 40px;
         }
 
-        @keyframes gentleFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Bouton "clic" */
+        /* Bouton clic stylisé et moderne */
         .click-btn {
-            background-color: white;
-            color: #ff758f;
-            border: 2px solid var(--accent-pink);
-            padding: 12px 40px;
-            border-radius: 30px;
-            font-size: 1.1rem;
+            background-color: var(--text-color);
+            color: white;
+            border: none;
+            padding: 14px 50px;
+            border-radius: 50px;
+            font-size: 1rem;
             font-weight: 600;
-            letter-spacing: 1px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 179, 193, 0.3);
+            box-shadow: 0 10px 25px rgba(255, 93, 143, 0.4);
         }
 
         .click-btn:hover {
-            background-color: var(--accent-pink);
-            color: white;
-            transform: scale(1.05);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 93, 143, 0.6);
         }
 
-        /* --- LE GRAND CŒUR SURPRISE (OVERLAY) --- */
-        .overlay-heart {
+        /* --- LA LETTRE SURPRISE (MODAL BLANC) --- */
+        .overlay-letter {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 240, 243, 0.85); /* Fond flouté rose */
-            backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
             z-index: 100;
             display: none;
             justify-content: center;
             align-items: center;
             opacity: 0;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.4s ease;
         }
 
-        .overlay-heart.show {
+        .overlay-letter.show {
             display: flex;
             opacity: 1;
         }
 
-        /* Forme de cœur géant */
-        .heart-shape {
-            width: 320px;
-            height: 290px;
-            background-color: var(--dark-pink);
-            position: relative;
-            transform: scale(0.5);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 15px 40px rgba(255, 77, 109, 0.4);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 30px;
-        }
-
-        .heart-shape::before,
-        .heart-shape::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            width: 320px;
-            height: 290px;
-            background-color: var(--dark-pink);
-            border-radius: 160px 160px 0 0;
-        }
-
-        .heart-shape::before {
-            left: 160px;
-            transform: rotate(-45deg);
-            transform-origin: 0 100%;
-        }
-
-        .heart-shape::after {
-            left: 0;
-            transform: rotate(45deg);
-            transform-origin: 100% 100%;
-        }
-
-        .overlay-heart.show .heart-shape {
-            transform: scale(1.3); /* Zoom du cœur à l'ouverture */
-        }
-
-        /* Texte à l'intérieur du cœur */
-        .heart-text {
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.75rem; /* Ajusté pour rentrer parfaitement dans le coeur */
-            line-height: 1.5;
+        .paper-letter {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
             text-align: center;
+            transform: scale(0.85);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             position: relative;
-            z-index: 10;
+        }
+
+        .overlay-letter.show .paper-letter {
+            transform: scale(1);
+        }
+
+        .letter-text {
+            color: #333333; /* Texte de la lettre sombre pour une lecture parfaite */
+            font-size: 1.05rem;
+            line-height: 1.6;
             font-weight: 400;
-            max-width: 240px;
+            margin-bottom: 30px;
         }
 
-        .heart-text span {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.1rem;
-            display: block;
-            margin-top: 5px;
-        }
-
-        /* Bouton fermer discret sous le cœur */
+        /* Bouton fermer épuré */
         .close-btn {
-            position: absolute;
-            bottom: -50px;
-            left: 50%;
-            transform: translateX(-50%);
             background: transparent;
-            border: 1px solid white;
-            color: white;
-            padding: 4px 15px;
-            border-radius: 20px;
+            border: none;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             cursor: pointer;
-            font-size: 0.7rem;
-            z-index: 20;
+            padding: 5px 10px;
+            transition: opacity 0.2s;
         }
 
-        /* --- PETITS COEURS VOLANTS AU CLIC EN ARRIÈRE PLAN --- */
-        .mini-heart {
-            position: absolute;
-            color: var(--dark-pink);
-            pointer-events: none;
-            z-index: 5;
-            animation: flyUp 2.5s ease-out forwards;
-        }
-
-        @keyframes flyUp {
-            0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
-            15% { opacity: 0.7; }
-            100% { transform: translate(var(--x), var(--y)) scale(1.2); opacity: 0; }
+        .close-btn:hover {
+            opacity: 0.7;
         }
     </style>
 </head>
-<body onclick="spawnHearts(event)">
+<body>
 
+    <!-- Fond de cœurs volants -->
+    <div id="hearts-background"></div>
+
+    <!-- Conteneur principal (Première vue) -->
     <div class="main-container">
         <h1>Pour la future mère de mes enfants</h1>
         
-        <img class="flower-bouquet" src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=500&auto=format&fit=crop" alt="Fleurs">
+        <!-- Ton image fleur.png appelée directement -->
+        <img class="flower-image" src="fleur.png" alt="Fleurs">
         
         <br>
-        <button class="click-btn" onclick="openHeart(event)">clic</button>
+        <button class="click-btn" onclick="openLetter(event)">clic</button>
     </div>
 
-    <div class="overlay-heart" id="heartOverlay" onclick="closeHeart()">
-        <div class="heart-shape" onclick="event.stopPropagation()">
-            <div class="heart-text">
+    <!-- Fenêtre de la lettre en papier blanc (Sans Emojis) -->
+    <div class="overlay-letter" id="letterOverlay" onclick="closeLetter()">
+        <div class="paper-letter" onclick="event.stopPropagation()">
+            <div class="letter-text">
                 Désolé du retard. J'étais en train de coder le site.<br><br>
-                Je sais que c'est compliqué entre nous en ce moment. Mais je t'aime ma future femme de mes enfants. ❤️
-                <button class="close-btn" onclick="closeHeart()">Fermer</button>
+                Je sais que c'est compliqué entre nous en ce moment. Mais je t'aime ma future femme de mes enfants.
             </div>
+            <button class="close-btn" onclick="closeLetter()">Fermer</button>
         </div>
     </div>
 
+    <!-- SCRIPT DES SYSTEMES DE COEURS -->
     <script>
-        const overlay = document.getElementById('heartOverlay');
+        const overlay = document.getElementById('letterOverlay');
+        const backgroundContainer = document.getElementById('hearts-background');
 
-        function openHeart(e) {
-            e.stopPropagation(); // Évite de déclencher d'autres clics
+        function openLetter(e) {
+            e.stopPropagation();
             overlay.classList.add('show');
-            // Grosse explosion de cœurs au centre
-            for(let i=0; i<15; i++) {
-                createHeart(window.innerWidth / 2, window.innerHeight / 2);
-            }
         }
 
-        function closeHeart() {
+        function closeLetter() {
             overlay.classList.remove('show');
         }
 
-        // Fonction pour faire apparaître des petits cœurs n'importe où au clic
-        function spawnHearts(e) {
-            if(e.target.tagName === 'BUTTON') return;
-            for(let i=0; i<4; i++) {
-                createHeart(e.clientX, e.clientY);
-            }
-        }
-
-        function createHeart(x, y) {
+        // Générateur automatique de cœurs en arrière-plan
+        function createAmbientHeart() {
             const heart = document.createElement('div');
-            heart.classList.add('mini-heart');
+            heart.classList.add('ambient-heart');
             heart.innerHTML = '❤️';
-            heart.style.left = x + 'px';
-            heart.style.top = y + 'px';
-
-            // Directions aléatoires
-            const randomX = (Math.random() - 0.5) * 250;
-            const randomY = (Math.random() - 0.8) * 200; // Monte vers le haut
-            heart.style.setProperty('--x', `${randomX}px`);
-            heart.style.setProperty('--y', `${randomY}px`);
             
-            heart.style.fontSize = (Math.random() * 12 + 10) + 'px';
+            // Position de départ aléatoire sur la largeur
+            heart.style.left = Math.random() * 100 + 'vw';
+            // Vitesse aléatoire
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            // Taille aléatoire
+            heart.style.fontSize = (Math.random() * 15 + 12) + 'px';
+            
+            backgroundContainer.appendChild(heart);
 
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 2500);
+            // Nettoyage du cœur après l'animation
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
         }
+
+        // Lance la pluie de cœurs continue dès le chargement
+        setInterval(createAmbientHeart, 400);
     </script>
 </body>
 </html>
