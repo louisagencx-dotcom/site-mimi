@@ -31,7 +31,7 @@
             position: relative;
         }
 
-        /* --- IMAGE DE FOND ALIGNÉE ET SANS COUPURE EN HAUT --- */
+        /* --- IMAGE DE FOND COUVRE L'ÉCRAN ET COLLÉE EN HAUT --- */
         .background-overlay-flowers {
             position: fixed;
             top: 0;
@@ -39,20 +39,18 @@
             width: 100vw;
             height: 100vh;
             background-image: url('fleur.png');
-            /* background-size ajusté pour garder un joli bouquet bien visible */
-            background-size: 70%; 
-            /* On l'aligne horizontalement au centre, et verticalement à 30px du haut pour ne pas couper les fleurs */
-            background-position: center 30px; 
+            background-size: cover; /* Remplit l'écran pour éviter que l'image tombe en bas */
+            background-position: center top; /* Centre horizontalement, colle parfaitement en haut */
             background-repeat: no-repeat;
             z-index: 0;
             pointer-events: none;
         }
 
-        /* Ajustement de la position et du zoom pour les téléphones */
+        /* Ajustement spécifique sur mobile pour que le bouquet reste bien proportionné */
         @media (max-width: 600px) {
             .background-overlay-flowers {
-                background-size: 100%; /* S'adapte à la largeur du mobile */
-                background-position: center 20px; /* Colle le haut des fleurs près du haut de l'écran mobile */
+                background-size: contain; /* Évite un trop gros zoom sur les écrans étroits de téléphone */
+                background-position: center top; 
             }
         }
 
@@ -89,8 +87,7 @@
             width: 100%;
             z-index: 10;
             position: relative;
-            /* Petit décalage vers le bas pour que le texte ne se superpose pas trop sur les têtes de fleurs */
-            margin-top: 80px; 
+            margin-top: 120px; /* Aligne le texte sous les fleurs */
         }
 
         h1 {
@@ -192,7 +189,7 @@
 </head>
 <body>
 
-    <!-- Image fleur.png descendue et alignée par le haut -->
+    <!-- Image fleur.png bloquée en haut de l'écran -->
     <div class="background-overlay-flowers"></div>
 
     <!-- Fond de cœurs volants -->
