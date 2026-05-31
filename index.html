@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pour toi</title>
     <style>
-        /* --- POLICES ET COULEURS APAISANTES --- */
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Poppins:wght@300;400&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+        /* --- IMPORTATION DES POLICES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap');
 
         :root {
-            --bg-color: #f8f6f2; /* Crème doux */
-            --primary-color: #8fa89b; /* Vert sauge apaisant */
-            --text-color: #3a3f3a; /* Gris-vert très sombre */
-            --accent-color: #d9746b; /* Terracotta doux pour les coeurs */
-            --letter-bg: #fffdf9;
+            --bg-color: #fff0f3; /* Fond rose pastel très doux */
+            --text-color: #4a3f35;
+            --accent-pink: #ffb3c1; /* Rose pastel pour les boutons/éléments */
+            --dark-pink: #ff4d6d; /* Rose soutenu pour le grand cœur */
         }
 
         * {
@@ -27,397 +25,247 @@
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            overflow-x: hidden;
-            line-height: 1.7;
-        }
-
-        /* --- EFFET PLUIE DE COEURS (GLOBAL) --- */
-        #hearts-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 999;
-        }
-
-        .heart-particle {
-            position: absolute;
-            color: var(--accent-color);
-            opacity: 0;
-            animation: heartFloat 3s ease-out forwards;
-        }
-
-        @keyframes heartFloat {
-            0% { transform: translate(0, 0) scale(0.5) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.6; }
-            80% { opacity: 0.6; }
-            100% { transform: translate(var(--mx), var(--my)) scale(1.3) rotate(var(--rt)); opacity: 0; }
-        }
-
-        /* --- ACCUEIL --- */
-        header {
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 30px;
+            overflow: hidden;
         }
 
-        .main-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 40px;
-            filter: grayscale(20%);
-            opacity: 0.9;
+        /* --- CONTENEUR PRINCIPAL CENTRÉ --- */
+        .main-container {
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            z-index: 10;
+            position: relative;
         }
 
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 400;
-            font-size: 2.5rem;
-            color: var(--text-color);
-            margin-bottom: 20px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #ff758f;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        /* Bouquet de fleurs poétique libre de droits */
+        .flower-bouquet {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 8px 20px rgba(255, 179, 193, 0.4);
+            margin-bottom: 35px;
+            animation: gentleFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Bouton "clic" */
+        .click-btn {
+            background-color: white;
+            color: #ff758f;
+            border: 2px solid var(--accent-pink);
+            padding: 12px 40px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
             letter-spacing: 1px;
-        }
-
-        .intro-text {
-            font-size: 1.05rem;
-            max-width: 500px;
-            opacity: 0.85;
-            margin-bottom: 40px;
-            font-weight: 300;
-        }
-
-        .action-btn {
-            background-color: transparent;
-            color: var(--text-color);
-            border: 1px solid var(--text-color);
-            padding: 12px 35px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.4s ease;
-            position: relative;
-            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 179, 193, 0.3);
         }
 
-        .action-btn:hover {
-            background-color: var(--text-color);
-            color: var(--bg-color);
+        .click-btn:hover {
+            background-color: var(--accent-pink);
+            color: white;
+            transform: scale(1.05);
         }
 
-        /* --- SECTION CONTENU PRINCIPAL (SOBRE) --- */
-        .content-section {
-            max-width: 650px;
-            margin: 0 auto;
-            padding: 100px 25px;
-            text-align: center;
-        }
-
-        .thought-box {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-            margin-bottom: 30px;
-            border-left: 3px solid var(--primary-color);
-            text-align: left;
-            border-right: 1px solid rgba(0,0,0,0.02);
-            border-top: 1px solid rgba(0,0,0,0.02);
-            border-bottom: 1px solid rgba(0,0,0,0.02);
-        }
-
-        .thought-box span {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--primary-color);
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .thought-box p {
-            font-size: 1rem;
-            opacity: 0.9;
-            font-style: italic;
-            font-family: 'Playfair Display', serif;
-        }
-
-        /* --- MODELE DE LA LETTRE COEUR --- */
-        .letter-overlay {
+        /* --- LE GRAND CŒUR SURPRISE (OVERLAY) --- */
+        .overlay-heart {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(3px);
-            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 240, 243, 0.85); /* Fond flouté rose */
+            backdrop-filter: blur(4px);
+            z-index: 100;
             display: none;
             justify-content: center;
             align-items: center;
             opacity: 0;
-            transition: opacity 0.5s;
+            transition: opacity 0.5s ease;
         }
 
-        .letter-overlay.show {
+        .overlay-heart.show {
             display: flex;
             opacity: 1;
         }
 
-        .envelope-wrapper {
+        /* Forme de cœur géant */
+        .heart-shape {
+            width: 320px;
+            height: 290px;
+            background-color: var(--dark-pink);
             position: relative;
-            cursor: pointer;
-            animation: envelopeFlyIn 0.8s ease-out forwards;
-        }
-
-        @keyframes envelopeFlyIn {
-            0% { transform: translateY(100px) scale(0.7); opacity: 0; }
-            100% { transform: translateY(0) scale(1); opacity: 1; }
-        }
-
-        /* L'enveloppe */
-        .envelope {
-            width: 200px;
-            height: 130px;
-            background: #e0d8c3;
-            border-radius: 0 0 5px 5px;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        /* Le rabat de l'enveloppe */
-        .envelope::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            border-left: 100px solid transparent;
-            border-right: 100px solid transparent;
-            border-top: 70px solid #d4cbb1;
-            transform-origin: top;
-            transition: transform 0.5s 0.2s;
-            z-index: 2;
-        }
-
-        /* Quand l'enveloppe s'ouvre */
-        .envelope-wrapper.open .envelope::before {
-            transform: rotateX(180deg);
-            z-index: 0;
-        }
-
-        /* La lettre en forme de cœur cachée */
-        .heart-letter {
-            width: 100px;
-            height: 90px;
-            background: var(--accent-color);
-            position: absolute;
-            top: 20px;
-            left: 50px;
-            transition: all 0.7s 0.5s ease-in-out;
-            z-index: 1;
-            opacity: 0;
+            transform: scale(0.5);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 40px rgba(255, 77, 109, 0.4);
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 30px;
         }
 
-        /* Forme de cœur via CSS */
-        .heart-letter::before,
-        .heart-letter::after {
+        .heart-shape::before,
+        .heart-shape::after {
             content: "";
             position: absolute;
             top: 0;
-            width: 100px;
-            height: 90px;
-            background: var(--accent-color);
-            border-radius: 50px 50px 0 0;
+            width: 320px;
+            height: 290px;
+            background-color: var(--dark-pink);
+            border-radius: 160px 160px 0 0;
         }
-        .heart-letter::before { left: 50px; transform: rotate(-45deg); transform-origin: 0 100%; }
-        .heart-letter::after { left: 0; transform: rotate(45deg); transform-origin: 100% 100%; }
 
-        /* Contenu de la lettre (le texte) */
-        .heart-letter p {
-            font-family: 'Dancing Script', cursive;
+        .heart-shape::before {
+            left: 160px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart-shape::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        .overlay-heart.show .heart-shape {
+            transform: scale(1.3); /* Zoom du cœur à l'ouverture */
+        }
+
+        /* Texte à l'intérieur du cœur */
+        .heart-text {
             color: white;
-            font-size: 1.2rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem; /* Ajusté pour rentrer parfaitement dans le coeur */
+            line-height: 1.5;
+            text-align: center;
             position: relative;
-            z-index: 5;
-            opacity: 0;
-            transition: opacity 0.5s 1.2s;
+            z-index: 10;
+            font-weight: 400;
+            max-width: 240px;
         }
 
-        /* Animation de sortie de la lettre */
-        .envelope-wrapper.open .heart-letter {
-            transform: translateY(-150px) scale(2.5);
-            opacity: 1;
+        .heart-text span {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.1rem;
+            display: block;
+            margin-top: 5px;
         }
 
-        .envelope-wrapper.open .heart-letter p {
-            opacity: 1;
-        }
-
-        /* Bouton fermer */
-        .close-letter {
+        /* Bouton fermer discret sous le cœur */
+        .close-btn {
             position: absolute;
-            bottom: -60px;
+            bottom: -50px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(255,255,255,0.2);
+            background: transparent;
             border: 1px solid white;
             color: white;
-            padding: 5px 15px;
+            padding: 4px 15px;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 0.8rem;
-            opacity: 0;
-            transition: opacity 0.5s 1.5s;
+            font-size: 0.7rem;
+            z-index: 20;
         }
 
-        .envelope-wrapper.open .close-letter {
-            opacity: 1;
+        /* --- PETITS COEURS VOLANTS AU CLIC EN ARRIÈRE PLAN --- */
+        .mini-heart {
+            position: absolute;
+            color: var(--dark-pink);
+            pointer-events: none;
+            z-index: 5;
+            animation: flyUp 2.5s ease-out forwards;
         }
 
-        /* --- FOOTER --- */
-        footer {
-            padding: 60px 20px;
-            text-align: center;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            opacity: 0.5;
-            border-top: 1px solid rgba(0,0,0,0.05);
+        @keyframes flyUp {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+            15% { opacity: 0.7; }
+            100% { transform: translate(var(--x), var(--y)) scale(1.2); opacity: 0; }
         }
     </style>
 </head>
-<body onclick="triggerHearts(event)">
+<body onclick="spawnHearts(event)">
 
-    <div id="hearts-container"></div>
+    <div class="main-container">
+        <h1>Pour la future mère de mes enfants</h1>
+        
+        <img class="flower-bouquet" src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=500&auto=format&fit=crop" alt="Fleurs">
+        
+        <br>
+        <button class="click-btn" onclick="openHeart(event)">clic</button>
+    </div>
 
-    <!-- Accueil discret -->
-    <header>
-        <img class="main-img" src="https://images.unsplash.com/photo-1551884831-bbf3cdc67099?q=80&w=500&auto=format&fit=crop" alt="Douceur">
-        <h1>Pour la future maman de nos enfants.</h1>
-        <p class="intro-text">Un petit espace calme, juste pour te transmettre de douces pensées et un peu de soutien dans ce rôle si précieux qui t'attend.</p>
-        <!-- Le bouton déclenche l'animation de la lettre -->
-        <button class="action-btn" onclick="openHeartLetter(event)">
-            Entrer doucement
-        </button>
-    </header>
-
-    <!-- Overlay de la lettre coeur -->
-    <div class="letter-overlay" id="letterOverlay">
-        <div class="envelope-wrapper" id="envelopeWrapper" onclick="animateEnvelope(event)">
-            <div class="envelope"></div>
-            <div class="heart-letter">
-                <p>Je t'aime et tout et cetera... ❤️</p>
+    <div class="overlay-heart" id="heartOverlay" onclick="closeHeart()">
+        <div class="heart-shape" onclick="event.stopPropagation()">
+            <div class="heart-text">
+                Désolé du retard. J'étais en train de coder le site.<br><br>
+                Je sais que c'est compliqué entre nous en ce moment. Mais je t'aime ma future femme de mes enfants. ❤️
+                <button class="close-btn" onclick="closeHeart()">Fermer</button>
             </div>
-            <button class="close-letter" onclick="closeHeartLetter(event)">Fermer</button>
         </div>
     </div>
 
-    <!-- Section Messages Simples -->
-    <section class="content-section" id="messages">
-        <div class="thought-box">
-            <span>Reconnaissance</span>
-            <p>"Je sais la force qu'il faut pour porter la vie, et je te respecte profondément pour la maman que tu t'apprêtes à être."</p>
-        </div>
-        <div class="thought-box">
-            <span>Soutien</span>
-            <p>"Peu importe le moment ou les vagues, sache que mon soutien pour toi reste entier, solide et bienveillant."</p>
-        </div>
-        <div class="thought-box">
-            <span>Présence</span>
-            <p>"Une simple pensée pour t'apporter un peu de sérénité aujourd'hui. Prends soin de toi, à ton rythme."</p>
-        </div>
-    </section>
-
-    <footer>
-        Pensées bienveillantes • 2026
-    </footer>
-
     <script>
-        // --- ANIMATION GLOBALE DES COEURS ---
-        function triggerHearts(e) {
-            // Ne pas déclencher si on clique sur le bouton principal (car il a sa propre logique)
-            if (e.target.tagName === 'BUTTON') return;
+        const overlay = document.getElementById('heartOverlay');
 
-            const container = document.getElementById('hearts-container');
-            
-            for (let i = 0; i < 6; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('heart-particle');
-                heart.innerHTML = '❤️';
-                
-                heart.style.left = e.clientX + 'px';
-                heart.style.top = e.clientY + 'px';
-                
-                const mx = (Math.random() - 0.5) * 200; // Dispersion horizontale
-                const my = (Math.random() - 0.8) * 150; // Dispersion verticale (monte plus)
-                const rt = (Math.random() - 0.5) * 60; // Rotation
-                
-                heart.style.setProperty('--mx', `${mx}px`);
-                heart.style.setProperty('--my', `${my}px`);
-                heart.style.setProperty('--rt', `${rt}deg`);
-                heart.style.fontSize = (Math.random() * 10 + 10) + 'px';
-                
-                container.appendChild(heart);
-                
-                setTimeout(() => heart.remove(), 3000);
-            }
-        }
-
-        // --- LOGIQUE DE LA LETTRE COEUR ---
-        const overlay = document.getElementById('letterOverlay');
-        const wrapper = document.getElementById('envelopeWrapper');
-
-        function openHeartLetter(e) {
-            e.stopPropagation(); // Empêche les coeurs globaux
+        function openHeart(e) {
+            e.stopPropagation(); // Évite de déclencher d'autres clics
             overlay.classList.add('show');
-            wrapper.classList.remove('open'); // Reset si déjà ouvert
-        }
-
-        function animateEnvelope(e) {
-            e.stopPropagation(); // Empêche de fermer l'overlay en cliquant sur l'enveloppe
-            if (!wrapper.classList.contains('open')) {
-                wrapper.classList.add('open');
-                // Explosion de coeurs quand la lettre sort
-                setTimeout(() => triggerHeartsAt(window.innerWidth/2, window.innerHeight/2 - 100, 15), 1000);
+            // Grosse explosion de cœurs au centre
+            for(let i=0; i<15; i++) {
+                createHeart(window.innerWidth / 2, window.innerHeight / 2);
             }
         }
 
-        function closeHeartLetter(e) {
-            e.stopPropagation();
+        function closeHeart() {
             overlay.classList.remove('show');
         }
 
-        // Fermer si on clique à côté de l'enveloppe
-        overlay.addEventListener('click', () => {
-            overlay.classList.remove('show');
-        });
-
-        // Fonction utilitaire pour déclencher des coeurs à un endroit précis
-        function triggerHeartsAt(x, y, count) {
-            const container = document.getElementById('hearts-container');
-            for (let i = 0; i < count; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('heart-particle');
-                heart.innerHTML = '❤️';
-                heart.style.left = x + 'px';
-                heart.style.top = y + 'px';
-                heart.style.setProperty('--mx', `${(Math.random() - 0.5) * 300}px`);
-                heart.style.setProperty('--my', `${(Math.random() - 0.7) * 250}px`);
-                heart.style.setProperty('--rt', `${(Math.random() - 0.5) * 90}deg`);
-                container.appendChild(heart);
-                setTimeout(() => heart.remove(), 3000);
+        // Fonction pour faire apparaître des petits cœurs n'importe où au clic
+        function spawnHearts(e) {
+            if(e.target.tagName === 'BUTTON') return;
+            for(let i=0; i<4; i++) {
+                createHeart(e.clientX, e.clientY);
             }
+        }
+
+        function createHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.classList.add('mini-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+
+            // Directions aléatoires
+            const randomX = (Math.random() - 0.5) * 250;
+            const randomY = (Math.random() - 0.8) * 200; // Monte vers le haut
+            heart.style.setProperty('--x', `${randomX}px`);
+            heart.style.setProperty('--y', `${randomY}px`);
+            
+            heart.style.fontSize = (Math.random() * 12 + 10) + 'px';
+
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 2500);
         }
     </script>
 </body>
