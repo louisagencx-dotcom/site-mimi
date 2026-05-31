@@ -9,7 +9,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
 
         :root {
-            --bg-color: #000000; /* Fond noir complet comme demandé */
+            --bg-color: #000000; /* Fond noir complet */
             --text-color: #ff5d8f; /* Ta couleur rose de texte et de boutons */
         }
 
@@ -31,7 +31,7 @@
             position: relative;
         }
 
-        /* --- IMAGE DE FOND RECENTRÉE ET LÉGÈREMENT ZOOMÉE --- */
+        /* --- IMAGE DE FOND ALIGNÉE ET SANS COUPURE EN HAUT --- */
         .background-overlay-flowers {
             position: fixed;
             top: 0;
@@ -39,18 +39,20 @@
             width: 100vw;
             height: 100vh;
             background-image: url('fleur.png');
-            /* background-size à 85% permet de zoomer un peu plus sur le bouquet qu'avec "contain" */
-            background-size: 85%; 
-            background-position: center; /* Centre parfaitement le bouquet */
+            /* background-size ajusté pour garder un joli bouquet bien visible */
+            background-size: 70%; 
+            /* On l'aligne horizontalement au centre, et verticalement à 30px du haut pour ne pas couper les fleurs */
+            background-position: center 30px; 
             background-repeat: no-repeat;
             z-index: 0;
             pointer-events: none;
         }
 
-        /* Ajustement du zoom pour les petits écrans de téléphone */
+        /* Ajustement de la position et du zoom pour les téléphones */
         @media (max-width: 600px) {
             .background-overlay-flowers {
-                background-size: 110%; /* Zoom un peu plus prononcé sur mobile pour bien voir les fleurs */
+                background-size: 100%; /* S'adapte à la largeur du mobile */
+                background-position: center 20px; /* Colle le haut des fleurs près du haut de l'écran mobile */
             }
         }
 
@@ -68,7 +70,7 @@
         .ambient-heart {
             position: absolute;
             color: var(--text-color);
-            opacity: 0.5; /* Légèrement plus visible sur fond noir */
+            opacity: 0.5;
             animation: floatUpwards 5s linear infinite;
         }
 
@@ -87,6 +89,8 @@
             width: 100%;
             z-index: 10;
             position: relative;
+            /* Petit décalage vers le bas pour que le texte ne se superpose pas trop sur les têtes de fleurs */
+            margin-top: 80px; 
         }
 
         h1 {
@@ -96,7 +100,6 @@
             margin-bottom: 40px;
             letter-spacing: -0.5px;
             line-height: 1.3;
-            /* Ombre portée noire pour détacher proprement le texte de l'image de fond */
             text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9), 0 2px 4px rgba(0, 0, 0, 0.9);
         }
 
@@ -128,7 +131,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6); /* Fond légèrement plus sombre derrière la lettre */
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(5px);
             z-index: 100;
             display: none;
@@ -189,7 +192,7 @@
 </head>
 <body>
 
-    <!-- Image fleur.png en arrière-plan, centrée et zoomée juste ce qu'il faut -->
+    <!-- Image fleur.png descendue et alignée par le haut -->
     <div class="background-overlay-flowers"></div>
 
     <!-- Fond de cœurs volants -->
