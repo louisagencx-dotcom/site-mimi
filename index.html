@@ -9,8 +9,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
 
         :root {
-            --bg-color: #ffacc5; /* Ta couleur de fond exacte */
-            --text-color: #ff5d8f; /* Ta couleur de texte exacte */
+            --bg-color: #000000; /* Fond noir complet comme demandé */
+            --text-color: #ff5d8f; /* Ta couleur rose de texte et de boutons */
         }
 
         * {
@@ -31,7 +31,7 @@
             position: relative;
         }
 
-        /* --- IMAGE DE FOND COMPLÈTE ET RECENTRÉE --- */
+        /* --- IMAGE DE FOND RECENTRÉE ET LÉGÈREMENT ZOOMÉE --- */
         .background-overlay-flowers {
             position: fixed;
             top: 0;
@@ -39,11 +39,19 @@
             width: 100vw;
             height: 100vh;
             background-image: url('fleur.png');
-            background-size: contain; /* Ajuste l'image pour qu'elle soit entièrement visible sans zoom */
-            background-position: center; /* Centre parfaitement la fleur */
-            background-repeat: no-repeat; /* Évite que l'image se répète en mosaïque */
+            /* background-size à 85% permet de zoomer un peu plus sur le bouquet qu'avec "contain" */
+            background-size: 85%; 
+            background-position: center; /* Centre parfaitement le bouquet */
+            background-repeat: no-repeat;
             z-index: 0;
             pointer-events: none;
+        }
+
+        /* Ajustement du zoom pour les petits écrans de téléphone */
+        @media (max-width: 600px) {
+            .background-overlay-flowers {
+                background-size: 110%; /* Zoom un peu plus prononcé sur mobile pour bien voir les fleurs */
+            }
         }
 
         /* --- PLUIE DE COEURS CONTINUE EN ARRIÈRE-PLAN --- */
@@ -60,14 +68,14 @@
         .ambient-heart {
             position: absolute;
             color: var(--text-color);
-            opacity: 0.4;
+            opacity: 0.5; /* Légèrement plus visible sur fond noir */
             animation: floatUpwards 5s linear infinite;
         }
 
         @keyframes floatUpwards {
             0% { transform: translateY(105vh) scale(0.5); opacity: 0; }
-            15% { opacity: 0.5; }
-            90% { opacity: 0.5; }
+            15% { opacity: 0.6; }
+            90% { opacity: 0.6; }
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
@@ -88,8 +96,8 @@
             margin-bottom: 40px;
             letter-spacing: -0.5px;
             line-height: 1.3;
-            /* Ombre légère pour que le texte reste lisible par-dessus les couleurs de ton image */
-            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8), 0 2px 15px rgba(255, 172, 197, 0.6);
+            /* Ombre portée noire pour détacher proprement le texte de l'image de fond */
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9), 0 2px 4px rgba(0, 0, 0, 0.9);
         }
 
         /* Bouton clic stylisé et moderne */
@@ -120,7 +128,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.6); /* Fond légèrement plus sombre derrière la lettre */
             backdrop-filter: blur(5px);
             z-index: 100;
             display: none;
@@ -141,7 +149,7 @@
             border-radius: 12px;
             max-width: 450px;
             width: 90%;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
             text-align: center;
             transform: scale(0.85);
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -153,7 +161,7 @@
         }
 
         .letter-text {
-            color: #333333;
+            color: #222222;
             font-size: 1.05rem;
             line-height: 1.6;
             font-weight: 400;
@@ -181,7 +189,7 @@
 </head>
 <body>
 
-    <!-- Image fleur.png en arrière-plan complet, centrée et entière -->
+    <!-- Image fleur.png en arrière-plan, centrée et zoomée juste ce qu'il faut -->
     <div class="background-overlay-flowers"></div>
 
     <!-- Fond de cœurs volants -->
